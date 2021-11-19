@@ -1,0 +1,16 @@
+.then((userCredential) => {
+    updateProfile(auth.currentUser, {
+      displayName: this.state.username,
+      // photoURL: "https://example.com/jane-q-user/profile.jpg",
+    }).then(() => {
+      this.writeUserData(userCredential);
+    });
+  })
+
+
+
+  .catch((error) => {
+    this.setState({ loading: false });
+    const errorCode = error.code;
+    this.setState({ errMesg: errorCode });
+  })
