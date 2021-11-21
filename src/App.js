@@ -6,25 +6,27 @@ import Signup from "./components/Signup";
 import Home from "./components/components/Home";
 import React, { Component } from "react";
 import { getAuth } from "@firebase/auth";
+import Navbar from "./components/Navbar";
 
 export default class App extends Component {
   state = {
     tracker: false,
   };
   componentDidMount() {
-    console.log(this.props.isLoading);
     getAuth().onAuthStateChanged((user) => {
       if (user) {
         this.setState({ tracker: true });
       } else {
         this.setState({ tracker: false });
       }
+      console.log(this.state.tracker);
     });
   }
   render() {
     return (
       <>
         <BrowserRouter>
+          <Navbar />
           {this.state.tracker ? (
             <Routes>
               <Route path="/" element={<Home />} />

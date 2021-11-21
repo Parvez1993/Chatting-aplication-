@@ -3,6 +3,7 @@ import { getAuth } from "@firebase/auth";
 import { connect } from "react-redux";
 import { setuser } from "../../redux/actions";
 import { Dimmer, Loader, Segment } from "semantic-ui-react";
+import { Navigate } from "react-router";
 
 class Home extends Component {
   componentDidMount() {
@@ -11,6 +12,7 @@ class Home extends Component {
       if (user) {
         this.props.setuser(user);
       } else {
+        <Navigate to="/login" />;
       }
     });
   }

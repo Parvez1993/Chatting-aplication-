@@ -1,13 +1,8 @@
-import { thisExpression } from "@babel/types";
-import {
-  createUserWithEmailAndPassword,
-  getAuth,
-  signInWithEmailAndPassword,
-} from "@firebase/auth";
-import { errorPrefix } from "@firebase/util";
+import { getAuth, signInWithEmailAndPassword } from "@firebase/auth";
+
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Grid } from "semantic-ui-react";
+import { Container, Grid } from "semantic-ui-react";
 import {
   Button,
   Form,
@@ -17,6 +12,8 @@ import {
   Segment,
 } from "semantic-ui-react";
 
+import img from "../images/friend.png";
+import styled from "styled-components";
 export default class Signin extends Component {
   state = {
     email: "",
@@ -71,65 +68,86 @@ export default class Signin extends Component {
 
     return (
       <>
-        <Grid verticalAlign="center">
-          <Grid.Column style={{ maxWidth: 400 }}>
-            <Header as="h2" icon textAlign="center">
-              <Icon name="sign-in" />
-              <Header.Content>Login or Register</Header.Content>
-            </Header>
-            {errMesg ? (
-              <Message warning floating>
-                {errMesg}
-              </Message>
-            ) : (
-              ""
-            )}
-            {success ? (
-              <Message success floating>
-                {success}
-              </Message>
-            ) : (
-              ""
-            )}
-            <Segment raised>
-              <Form style={{ textAlign: "left" }}>
-                <Form.Field
-                  className={errMesg.includes("email") ? "error" : ""}
-                >
-                  <label>Email</label>
-                  <input
-                    placeholder="email"
-                    name="email"
-                    type="email"
-                    onChange={this.handleChange}
-                    value={email}
-                  />
-                </Form.Field>
-                <Form.Field
-                  className={errMesg.includes("Password") ? "error" : ""}
-                >
-                  <label>Password</label>
-                  <input
-                    name="password"
-                    type="password"
-                    onChange={this.handleChange}
-                    placeholder="password"
-                    value={password}
-                  />
-                </Form.Field>
-                <Button
-                  className={loading ? "loading primary" : ""}
-                  type="submit"
-                  onClick={this.handleSubmit}
-                >
-                  Submit
-                </Button>
-              </Form>
-            </Segment>
-            Dont have an account <Link to="/signin">Click here</Link>
-          </Grid.Column>
-        </Grid>
+        <Container>
+          <Wrapper>
+            {" "}
+            <Grid
+              columns={2}
+              padded="vertically"
+              className="ui center aligned grid"
+            >
+              <Grid.Column style={{ maxWidth: 600 }} className="columnOne">
+                <Header as="h3" icon textAlign="ledf">
+                  <Icon name="sign-in" />
+                  <Header.Content>Login</Header.Content>
+                </Header>
+                {errMesg ? (
+                  <Message warning floating>
+                    {errMesg}
+                  </Message>
+                ) : (
+                  ""
+                )}
+                {success ? (
+                  <Message success floating>
+                    {success}
+                  </Message>
+                ) : (
+                  ""
+                )}
+                <Segment raised>
+                  <Form style={{ textAlign: "left" }}>
+                    <Form.Field
+                      className={errMesg.includes("email") ? "error" : ""}
+                    >
+                      <label>Email</label>
+                      <input
+                        placeholder="email"
+                        name="email"
+                        type="email"
+                        onChange={this.handleChange}
+                        value={email}
+                      />
+                    </Form.Field>
+                    <Form.Field
+                      className={errMesg.includes("Password") ? "error" : ""}
+                    >
+                      <label>Password</label>
+                      <input
+                        name="password"
+                        type="password"
+                        onChange={this.handleChange}
+                        placeholder="password"
+                        value={password}
+                      />
+                    </Form.Field>
+                    <Button
+                      className={loading ? "loading primary" : ""}
+                      type="submit"
+                      onClick={this.handleSubmit}
+                    >
+                      Submit
+                    </Button>
+                  </Form>
+                </Segment>
+                <Segment raised>
+                  Dont have an account <Link to="/signin">Click here</Link>
+                </Segment>
+              </Grid.Column>
+
+              <Grid.Column>
+                <img src={img} alt="banner" />
+              </Grid.Column>
+            </Grid>
+          </Wrapper>
+        </Container>
       </>
     );
   }
 }
+
+const Wrapper = styled.div`
+  .columnOne {
+    margin: auto 0;
+  }
+`;
