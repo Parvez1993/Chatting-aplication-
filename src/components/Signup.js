@@ -6,6 +6,7 @@ import {
 import React, { Component } from "react";
 import {
   Button,
+  Container,
   Form,
   Grid,
   Header,
@@ -13,10 +14,12 @@ import {
   Message,
   Segment,
 } from "semantic-ui-react";
+import img from "../images/signin.png";
 import { getDatabase, ref, set } from "firebase/database";
 import { auth } from "./config";
 import { Link } from "react-router-dom";
-
+import styled from "styled-components";
+import Anime from "./Anime";
 export default class Signup extends Component {
   state = {
     username: "",
@@ -111,87 +114,115 @@ export default class Signup extends Component {
 
     return (
       <>
-        <Grid verticalAlign="center">
-          <Grid.Column style={{ maxWidth: 400 }}>
-            <Header as="h2" icon textAlign="center">
-              <Icon name="sign-in" />
-              <Header.Content>Register</Header.Content>
-            </Header>
-            {errMesg ? (
-              <Message warning floating>
-                {errMesg}
-              </Message>
-            ) : (
-              ""
-            )}
-            {success ? (
-              <Message success floating>
-                {success}
-              </Message>
-            ) : (
-              ""
-            )}
-            <Segment raised>
-              <Form style={{ textAlign: "left" }}>
-                <Form.Field>
-                  <label>Username</label>
-                  <input
-                    name="username"
-                    type="text"
-                    onChange={this.handleChange}
-                    placeholder="username"
-                    value={username}
-                  />
-                </Form.Field>
-                <Form.Field
-                  className={errMesg.includes("email") ? "error" : ""}
-                >
-                  <label>Email</label>
-                  <input
-                    placeholder="email"
-                    name="email"
-                    type="email"
-                    onChange={this.handleChange}
-                    value={email}
-                  />
-                </Form.Field>
-                <Form.Field
-                  className={errMesg.includes("Password") ? "error" : ""}
-                >
-                  <label>Password</label>
-                  <input
-                    name="password"
-                    type="password"
-                    onChange={this.handleChange}
-                    placeholder="password"
-                    value={password}
-                  />
-                </Form.Field>
-                <Form.Field>
-                  <label>Confirm Password</label>
-                  <input
-                    placeholder="confirm password"
-                    name="confirmPassword"
-                    type="password"
-                    onChange={this.handleChange}
-                    value={confirmPassword}
-                  />
-                </Form.Field>
-                <Button
-                  className={loading ? "loading primary" : ""}
-                  type="submit"
-                  onClick={this.handleSubmit}
-                >
-                  Submit
-                </Button>
-              </Form>
-            </Segment>
-            <Segment>
-              Already have an account <Link to="/login">Click here</Link>
-            </Segment>
-          </Grid.Column>
-        </Grid>
+        <Container>
+          {" "}
+          <Wrapper>
+            {" "}
+            <Grid
+              columns={2}
+              padded="vertically"
+              className="ui center aligned grid"
+            >
+              <Grid.Column style={{ maxWidth: 600 }} className="columnOne">
+                <Header as="h3" icon textAlign="center">
+                  <Icon name="sign-in" className="icon_header" />
+                  <Header.Content>Register</Header.Content>
+                </Header>
+                {errMesg ? (
+                  <Message warning floating>
+                    {errMesg}
+                  </Message>
+                ) : (
+                  ""
+                )}
+                {success ? (
+                  <Message success floating>
+                    {success}
+                  </Message>
+                ) : (
+                  ""
+                )}
+                <Segment raised>
+                  <Form style={{ textAlign: "left" }}>
+                    <Form.Field>
+                      <label>Username</label>
+                      <input
+                        name="username"
+                        type="text"
+                        onChange={this.handleChange}
+                        placeholder="username"
+                        value={username}
+                      />
+                    </Form.Field>
+                    <Form.Field
+                      className={errMesg.includes("email") ? "error" : ""}
+                    >
+                      <label>Email</label>
+                      <input
+                        placeholder="email"
+                        name="email"
+                        type="email"
+                        onChange={this.handleChange}
+                        value={email}
+                      />
+                    </Form.Field>
+                    <Form.Field
+                      className={errMesg.includes("Password") ? "error" : ""}
+                    >
+                      <label>Password</label>
+                      <input
+                        name="password"
+                        type="password"
+                        onChange={this.handleChange}
+                        placeholder="password"
+                        value={password}
+                      />
+                    </Form.Field>
+                    <Form.Field>
+                      <label>Confirm Password</label>
+                      <input
+                        placeholder="confirm password"
+                        name="confirmPassword"
+                        type="password"
+                        onChange={this.handleChange}
+                        value={confirmPassword}
+                      />
+                    </Form.Field>
+                    <Button
+                      className={loading ? "loading primary" : ""}
+                      type="submit"
+                      onClick={this.handleSubmit}
+                    >
+                      Submit
+                    </Button>
+                  </Form>
+                </Segment>
+                <Segment>
+                  Already have an account <Link to="/login">Click here</Link>
+                </Segment>
+              </Grid.Column>
+              <Grid.Column>
+                <Anime image={img} />
+              </Grid.Column>
+            </Grid>
+          </Wrapper>
+        </Container>
       </>
     );
   }
 }
+
+const Wrapper = styled.div`
+  .icon_header {
+    color: var(--blue);
+  }
+  .columnOne {
+    margin: auto 0;
+  }
+  Button {
+    background: var(--blue) !important;
+    display: flex;
+    width: 100%;
+    color: white !important;
+  }
+`;
