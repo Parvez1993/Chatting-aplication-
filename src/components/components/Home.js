@@ -1,16 +1,21 @@
 import React, { Component } from "react";
 import { getAuth } from "@firebase/auth";
 import { connect } from "react-redux";
-import { setuser } from "../../redux/actions";
-import { Dimmer, Loader, Segment } from "semantic-ui-react";
-
+import { setuser, removeUser } from "../../redux/actions";
+import { Container, Dimmer, Grid, Loader, Segment } from "semantic-ui-react";
+import { Navigate } from "react-router";
+import { ColorPanel } from "../ColorPanel";
+import SidePanel from "../SidePanel";
+import Message from "../Message";
+import MetaPanel from "../MetaPanel";
 class Home extends Component {
   componentDidMount() {
-    console.log(this.props.isLoading);
     getAuth().onAuthStateChanged((user) => {
       if (user) {
         this.props.setuser(user);
       } else {
+        this.props.removeUser();
+        <Navigate to="/login" />;
       }
     });
   }
@@ -25,7 +30,20 @@ class Home extends Component {
             </Dimmer>
           </Segment>
         ) : (
-          "owwww"
+          <Grid columns="equal">
+            <Grid.Column>
+              <ColorPanel userName={this.props.userName.displayName} />
+            </Grid.Column>{" "}
+            <Grid.Column>
+              <SidePanel userName={this.props.userName.displayName} />
+            </Grid.Column>{" "}
+            <Grid.Column>
+              <Message />
+            </Grid.Column>{" "}
+            <Grid.Column>
+              <MetaPanel />
+            </Grid.Column>
+          </Grid>
         )}
       </>
     );
@@ -34,6 +52,7 @@ class Home extends Component {
 
 const mapStateToProps = (state) => ({
   isLoading: state.user.isLoading,
+  userName: state.user.currentUser,
 });
 
-export default connect(mapStateToProps, { setuser })(Home);
+export default connect(mapStateToProps, { setuser, removeUser })(Home);

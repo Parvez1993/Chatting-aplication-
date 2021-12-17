@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { SET_USER } from "../actions/type";
+import { REMOVE_USER, SET_USER, SET_CURRENT_GROUP } from "../actions/type";
 
 const initialState = {
   currentUser: null,
@@ -13,6 +13,28 @@ const user_reducer = (state = initialState, action) => {
         currentUser: action.payload.currentUser,
         isLoading: false,
       };
+    case REMOVE_USER:
+      return {
+        ...state,
+        currentUser: null,
+      };
+    default:
+      return state;
+  }
+};
+
+const initialGroup = {
+  currentGroup: null,
+};
+
+const group_reducer = (state = initialGroup, action) => {
+  switch (action.type) {
+    case SET_CURRENT_GROUP:
+      return {
+        ...state,
+        currentGroup: action.payload.currentGroup,
+      };
+
     default:
       return state;
   }
@@ -20,4 +42,5 @@ const user_reducer = (state = initialState, action) => {
 
 export const rootReducer = combineReducers({
   user: user_reducer,
+  group: group_reducer,
 });

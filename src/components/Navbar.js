@@ -1,7 +1,27 @@
-import React from "react";
-import { Container } from "semantic-ui-react";
+import React, { useEffect } from "react";
+import { Container, Button } from "semantic-ui-react";
 import styled from "styled-components";
+import { useSelector, useDispatch } from "react-redux";
+import { getAuth, signOut } from "firebase/auth";
+import { Link, Navigate } from "react-router-dom";
+import { removeUser } from "../redux/actions/index";
+
 function Navbar() {
+  const auth = getAuth();
+
+  const signUserOut = async (e) => {
+    e.preventDefault();
+    try {
+      await signOut(auth).then(() => {
+        <Navigate to="/login" />;
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const cuurentUser = useSelector((item) => item.user.currentUser);
+  console.log(cuurentUser);
   return (
     <>
       <Wrapper>
@@ -10,6 +30,15 @@ function Navbar() {
             <div className="main">
               <div className="logo">
                 <h2>Gossip Zone</h2>
+              </div>
+              <div className="signOut">
+                {cuurentUser ? (
+                  <Button onClick={signUserOut}>Signout</Button>
+                ) : (
+                  <Link to="/login">
+                    <Button>Login</Button>
+                  </Link>
+                )}
               </div>
             </div>
           </Container>

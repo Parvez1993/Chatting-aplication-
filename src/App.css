@@ -24,5 +24,14 @@ h6 {
   font-family: "Raleway", sans-serif !important;
 }
 
-.ui.raised.segment {
+.main {
+  display: flex;
+  justify-content: space-around;
+}
+
+.menu_item {
+  color: rgb(255, 255, 255) !important;
+}
+.menu_item.active {
+  background-color: rgb(133, 143, 233) !important;
 }

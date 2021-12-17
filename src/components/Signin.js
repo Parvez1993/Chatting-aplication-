@@ -11,9 +11,10 @@ import {
   Message,
   Segment,
 } from "semantic-ui-react";
-
 import img from "../images/friend.png";
 import styled from "styled-components";
+import Anime from "./Anime";
+
 export default class Signin extends Component {
   state = {
     email: "",
@@ -77,10 +78,13 @@ export default class Signin extends Component {
               className="ui center aligned grid"
             >
               <Grid.Column style={{ maxWidth: 600 }} className="columnOne">
-                <Header as="h3" icon textAlign="ledf">
-                  <Icon name="sign-in" />
+                <Header as="h3" icon textAlign="center">
+                  <Icon name="sign-in" className="icon_header" />
                   <Header.Content>Login</Header.Content>
                 </Header>
+                <p style={{ textAlign: "left" }}>
+                  Have something to gossip about? We are waiting to hear
+                </p>
                 {errMesg ? (
                   <Message warning floating>
                     {errMesg}
@@ -131,12 +135,12 @@ export default class Signin extends Component {
                   </Form>
                 </Segment>
                 <Segment raised>
-                  Dont have an account <Link to="/signin">Click here</Link>
+                  Dont have an account <Link to="/signup">Click here</Link>
                 </Segment>
               </Grid.Column>
 
               <Grid.Column>
-                <img src={img} alt="banner" />
+                <Anime image={img} />
               </Grid.Column>
             </Grid>
           </Wrapper>
@@ -147,7 +151,16 @@ export default class Signin extends Component {
 }
 
 const Wrapper = styled.div`
+  .icon_header {
+    color: var(--blue);
+  }
   .columnOne {
     margin: auto 0;
+  }
+  Button {
+    background: var(--blue) !important;
+    display: flex;
+    width: 100%;
+    color: white !important;
   }
 `;
