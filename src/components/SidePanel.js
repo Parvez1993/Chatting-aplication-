@@ -10,7 +10,10 @@ export default class SidePanel extends Component {
         <Menu
           size="large"
           vertical
-          style={{ background: "var(--blue)", height: "100vh" }}
+          style={{
+            background: "var(--blue)",
+            height: "100vh",
+          }}
         >
           <UserPanel userName={this.props.userName} />
           <Groups userName={this.props.userName} />

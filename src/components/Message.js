@@ -5,10 +5,15 @@ import MessageForm from "./MessageForm";
 export default class Message extends Component {
   render() {
     return (
-      <div>
-        <MessageHeader />
+      <div style={{ height: "100vh" }}>
         <Segment>
+          <MessageHeader />
+        </Segment>
+
+        <Segment style={{ height: "550px", overflowY: "scroll" }}>
           <Comment.Group></Comment.Group>
+        </Segment>
+        <Segment>
           <MessageForm />
         </Segment>
       </div>

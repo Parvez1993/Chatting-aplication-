@@ -1,7 +1,12 @@
 import React, { Component } from "react";
+import { Segment } from "semantic-ui-react";
 
 export default class MetaPanel extends Component {
   render() {
-    return <div>Meta Panel</div>;
+    return (
+      <Segment>
+        <div>Meta Panel</div>
+      </Segment>
+    );
   }
 }

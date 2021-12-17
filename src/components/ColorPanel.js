@@ -18,8 +18,6 @@ export class ColorPanel extends Component {
             add
           </Menu.Item>
         </Sidebar>
-
-        <Sidebar.Pusher></Sidebar.Pusher>
       </Sidebar.Pushable>
     );
   }

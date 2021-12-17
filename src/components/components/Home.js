@@ -30,17 +30,19 @@ class Home extends Component {
             </Dimmer>
           </Segment>
         ) : (
-          <Grid columns="equal">
-            <Grid.Column>
+          <Grid columns="equal" style={{ marginTop: "3px" }}>
+            <Grid.Column width={1} style={{ padding: "0rem", zIndex: "-1" }}>
               <ColorPanel userName={this.props.userName.displayName} />
             </Grid.Column>{" "}
-            <Grid.Column>
+            <Grid.Column width={2} style={{ padding: "0rem", zIndex: "1" }}>
               <SidePanel userName={this.props.userName.displayName} />
             </Grid.Column>{" "}
-            <Grid.Column>
-              <Message />
+            <Grid.Column width={10} style={{ padding: "0rem" }}>
+              <div>
+                <Message />
+              </div>
             </Grid.Column>{" "}
-            <Grid.Column>
+            <Grid.Column width={2} style={{ padding: "0rem" }}>
               <MetaPanel />
             </Grid.Column>
           </Grid>
