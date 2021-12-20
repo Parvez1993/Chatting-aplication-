@@ -8,13 +8,12 @@ import { removeUser } from "../redux/actions/index";
 
 function Navbar() {
   const auth = getAuth();
-  const dispatch = useDispatch();
 
   const signUserOut = async (e) => {
     e.preventDefault();
     try {
       await signOut(auth).then(() => {
-        dispatch(removeUser());
+        <Navigate to="/login" />;
       });
     } catch (error) {
       console.log(error);

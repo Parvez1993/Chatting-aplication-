@@ -61,7 +61,7 @@ export default class Signup extends Component {
         .then((userCredential) => {
           updateProfile(auth.currentUser, {
             displayName: this.state.username,
-            // photoURL: "https://example.com/jane-q-user/profile.jpg",
+            photoURL: "https://example.com/jane-q-user/profile.jpg",
           })
             .then(() => {
               this.writeUserData(userCredential);

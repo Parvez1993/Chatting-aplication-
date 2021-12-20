@@ -14,3 +14,12 @@ export const removeUser = () => {
     type: ActionTypes.REMOVE_USER,
   };
 };
+
+export const setcurrentgroup = (group) => {
+  return {
+    type: ActionTypes.SET_CURRENT_GROUP,
+    payload: {
+      currentGroup: group,
+    },
+  };
+};
