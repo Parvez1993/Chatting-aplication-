@@ -1,23 +1,24 @@
 import React, { Component } from "react";
 import { Input, Message } from "semantic-ui-react";
 import { Button } from "semantic-ui-react";
-import {
-  getDatabase,
-  onValue,
-  push,
-  ref,
-  set,
-  child,
-} from "@firebase/database";
+import { getDatabase, push, ref, set, child } from "@firebase/database";
+import ModalComponent from "./ModalComponent";
 export default class MessageForm extends Component {
   state = {
     message: "",
     err: "",
+    modal: false,
+    typing: false,
   };
 
-  handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+  openModal = () => {
+    this.setState({ modal: true });
   };
+
+  closeModal = () => {
+    this.setState({ modal: false });
+  };
+  handleChange = (e) => {};
 
   handleMsgSubmit = () => {
     if (this.state.message) {
@@ -47,6 +48,7 @@ export default class MessageForm extends Component {
           style={{ width: "100%" }}
           onChange={this.handleChange}
           name="message"
+          value={this.state.message}
         />
 
         {this.state.err ? (
@@ -69,7 +71,18 @@ export default class MessageForm extends Component {
             primary
             style={{ width: "40%" }}
           />
-          <Button content="Add Media" secondary style={{ width: "40%" }} />
+          <Button
+            content="Add Media"
+            secondary
+            style={{ width: "40%" }}
+            onClick={this.openModal}
+          />
+          <ModalComponent
+            modal={this.state.modal}
+            close={this.closeModal}
+            groupName={this.props.groupName}
+            userName={this.props.userName}
+          />
         </div>
       </div>
     );

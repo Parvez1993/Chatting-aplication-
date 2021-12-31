@@ -35,3 +35,13 @@ h6 {
 .menu_item.active {
   background-color: rgb(133, 143, 233) !important;
 }
+
+.right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.left {
+  display: flex;
+  justify-content: flex-start;
+}

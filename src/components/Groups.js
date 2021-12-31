@@ -95,7 +95,6 @@ class Groups extends Component {
       this.setState({ active: firstGroup.id });
     }
     this.setState({ firstload: false });
-    console.log(firstGroup.id);
   };
 
   groupChange = (group) => {
@@ -107,11 +106,21 @@ class Groups extends Component {
       <>
         <div className="main">
           <div>
-            <Header as="h3" style={{ color: "white", marginTop: "40px" }}>
+            <Header
+              as="h3"
+              style={{
+                color: "white",
+                marginTop: "40px",
+              }}
+            >
               <Icon name="group" />
               Groups ({this.state.groups.length})
             </Header>
-            <Menu text vertical>
+            <Menu
+              text
+              vertical
+              style={{ padding: "0px 20px", fontSize: "18px" }}
+            >
               <Menu.Item header style={{ color: "white" }}>
                 Sort By
               </Menu.Item>

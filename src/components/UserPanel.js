@@ -27,7 +27,11 @@ export default class UserPanel extends Component {
           <Grid.Column>
             <Header
               as="h2"
-              style={{ color: "white", marginLeft: "40px", marginTop: "10px" }}
+              style={{
+                color: "white",
+                marginLeft: "40px",
+                marginTop: "10px",
+              }}
             ></Header>
             <Header as="h3" style={{ color: "white" }}>
               <Dropdown

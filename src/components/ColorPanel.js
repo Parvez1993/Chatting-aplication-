@@ -3,7 +3,7 @@ import { Header, Icon, Image, Menu, Segment, Sidebar } from "semantic-ui-react";
 export class ColorPanel extends Component {
   render() {
     return (
-      <Sidebar.Pushable as={Segment}>
+      <Sidebar.Pushable as={Segment} style={{ margin: "0px 20px" }}>
         <Sidebar
           as={Menu}
           animation="overlay"
