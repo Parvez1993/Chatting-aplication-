@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Input, Message } from "semantic-ui-react";
 import { Button } from "semantic-ui-react";
-import { getDatabase, push, ref, set, child } from "@firebase/database";
+import { getDatabase, push, ref, set, child, remove } from "@firebase/database";
 import ModalComponent from "./ModalComponent";
 export default class MessageForm extends Component {
   state = {
@@ -18,7 +18,23 @@ export default class MessageForm extends Component {
   closeModal = () => {
     this.setState({ modal: false });
   };
-  handleChange = (e) => {};
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+    if (e.target.value) {
+      this.setState({ typing: true });
+      const db = getDatabase();
+      set(ref(db, "typing/" + this.props.userName.uid), {
+        sender: this.props.userName.uid,
+        username: this.props.userName.displayName,
+        typing: this.state.typing,
+        groupId: this.props.groupName.id,
+      });
+    } else {
+      const db = getDatabase();
+      remove(ref(db, "typing/" + this.props.userName.uid));
+      this.setState({ typing: false });
+    }
+  };
 
   handleMsgSubmit = () => {
     if (this.state.message) {

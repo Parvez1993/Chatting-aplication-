@@ -73,6 +73,7 @@ class Groups extends Component {
     const db = getDatabase();
     const groupRef = ref(db, "groups");
     onValue(groupRef, (snapshot) => {
+      groupsafterLoad = [];
       snapshot.forEach((item) => {
         let groupData = {
           id: item.key,

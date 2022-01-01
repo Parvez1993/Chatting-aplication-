@@ -7,7 +7,6 @@ import {
   ref,
   onChildAdded,
   onChildChanged,
-  onChildRemoved,
   onValue,
 } from "firebase/database";
 import moment from "moment";
@@ -18,6 +17,24 @@ export default class Message extends Component {
     groupFiles: [],
     typing: [],
   };
+
+  componentDidMount() {
+    let arr = [];
+    const db = getDatabase();
+    const groupRef = ref(db, "typing");
+    onValue(groupRef, (snapshot) => {
+      snapshot.forEach((item) => {
+        let groupData = {
+          typing: item.val().typing,
+          sender: item.val().sender,
+          username: item.val().username,
+          groupId: item.val().groupId,
+        };
+        arr.push(groupData);
+      });
+      this.setState({ typing: arr });
+    });
+  }
 
   componentDidUpdate(previousProps) {
     let arr = [];
@@ -95,16 +112,37 @@ export default class Message extends Component {
     });
   }
 
+  filtertypinguser = () => {
+    const temp = this.state.typing
+      .filter((item) => item.sender !== this.props.userName.uid)
+      .map((i) => i.username);
+
+    if (temp[0] === undefined) {
+      return 0;
+    } else {
+      return temp[0];
+    }
+  };
+
   render() {
     console.log(this.state.groupFiles);
+    let temp = null;
+
+    console.log(temp);
     return (
       <div>
         <Segment>
           <MessageHeader />
         </Segment>
-        {/* {this.state.typing
-          ? this.state.typing.map((item) => <h1>{item.username}</h1>)
-          : ""} */}
+        {/* {this.state.typing ? this.filtertypinguser() : ""} */}
+        {this.state.typing
+          .filter((item) => item.sender !== this.props.userName.uid)
+          .map((i) => i.username)
+          ? ` ${this.state.typing
+              .filter((item) => item.sender !== this.props.userName.uid)
+              .map((i) => i.username)} is typing`
+          : ""}
+        {console.log("aaaaa", this.state.typing)}
         <Segment style={{ height: "200px", overflowY: "scroll" }}>
           <Comment.Group>
             {this.state.groupMsg.map((i) =>
