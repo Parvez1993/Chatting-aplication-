@@ -10,7 +10,7 @@ export default class MessageHeader extends Component {
           <Header as="h2">
             Group
             <Icon name="star outline" color="black" />
-            <Header as="h5">5 Users</Header>
+            <Header as="h5">{this.props.totalUser.length} Users</Header>
           </Header>
           <div>
             {" "}
@@ -19,6 +19,7 @@ export default class MessageHeader extends Component {
               icon="search"
               name="searchMessage"
               placeholder="search message"
+              onChange={this.props.handleSearchTerm}
             />
           </div>
         </div>

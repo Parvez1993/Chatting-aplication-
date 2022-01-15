@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Container, Button } from "semantic-ui-react";
+import { Container, Button, Image } from "semantic-ui-react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { getAuth, signOut } from "firebase/auth";
@@ -30,6 +30,17 @@ function Navbar() {
             <div className="main">
               <div className="logo">
                 <h2>Gossip Zone</h2>
+              </div>
+              <div>
+                {cuurentUser ? (
+                  <Image
+                    src={cuurentUser.photoURL}
+                    alt={cuurentUser.displayName}
+                    avatar
+                  />
+                ) : (
+                  ""
+                )}
               </div>
               <div className="signOut">
                 {cuurentUser ? (

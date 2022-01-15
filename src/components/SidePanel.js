@@ -15,7 +15,7 @@ export default class SidePanel extends Component {
             height: "100vh",
           }}
         >
-          <UserPanel userName={this.props.userName} />
+          <UserPanel userName={this.props.userName} user={this.props.user} />
           <Groups userName={this.props.userName} />
         </Menu>
       </>

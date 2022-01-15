@@ -1,15 +1,37 @@
 import { getAuth, signOut } from "@firebase/auth";
 import React, { Component } from "react";
-import { Dropdown, Grid, Header } from "semantic-ui-react";
+import { Button, Dropdown, Grid, Header, Icon, Modal } from "semantic-ui-react";
 import { removeUser } from "../redux/actions";
 import { Navigate } from "react-router-dom";
+import ProfileModal from "./ProfileModal";
 
 export default class UserPanel extends Component {
+  state = {
+    modal: false,
+  };
   dropDownOptions = () => [
     { text: <span>{this.props.userName}</span>, disabled: true },
-    { text: "Change Pro Pic" },
+    {
+      text: (
+        <Button
+          content="Change Profile "
+          style={{ width: "40%" }}
+          onClick={this.openModal}
+        />
+      ),
+    },
     { text: <span onClick={this.handleLogout}>"Signout"</span> },
   ];
+
+  openModal = () => {
+    this.setState({ modal: true });
+  };
+
+  closeModal = () => {
+    this.setState({ modal: false });
+  };
+
+  //modal
 
   render() {
     console.log(this.props.userName);
@@ -41,6 +63,13 @@ export default class UserPanel extends Component {
             </Header>
           </Grid.Column>
         </Grid>
+
+        {/* //modal */}
+        <ProfileModal
+          modal={this.state.modal}
+          close={this.closeModal}
+          username={this.props.user}
+        />
       </>
     );
   }

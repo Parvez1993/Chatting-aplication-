@@ -37,7 +37,10 @@ class Home extends Component {
               <ColorPanel userName={this.props.userName.displayName} />
             </Grid.Column>{" "}
             <Grid.Column width={2} style={{ padding: "0rem", zIndex: "1" }}>
-              <SidePanel userName={this.props.userName.displayName} />
+              <SidePanel
+                userName={this.props.userName.displayName}
+                user={this.props.userName}
+              />
             </Grid.Column>{" "}
             <Grid.Column
               width={8}
